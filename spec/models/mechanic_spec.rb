@@ -22,4 +22,25 @@ RSpec.describe Mechanic do
       end
     end
   end
+  describe 'instance methods' do
+    before :each do
+      @ab = Mechanic.create!(name: 'Absolam', years_experience: 42)
+      @vi = Mechanic.create!(name: 'Vi Allor', years_experience: 22)
+      @cr = Mechanic.create!(name: 'Crandor Armalax', years_experience: 445)
+      @hool = Ride.create!(name: 'The Hoolidan', thrill_rating: 7, open: true)
+      @naga = Ride.create!(name: 'Fearsome Naga', thrill_rating: 8, open: false)
+      @fuze = Ride.create!(name: 'Short Fuuze', thrill_rating: 5, open: true)
+      @fall = Ride.create!(name: 'DeepFall', thrill_rating: 10, open: true)
+
+      @cr.rides << @fuze
+      @cr.rides << @hool
+      @cr.rides << @naga
+      @cr.rides << @fall
+    end
+    describe '#rides_sorted' do
+      it 'returns by thrill descending' do
+        expect(@cr.rides_sorted).to eq([@fall, @naga, @hool, @fuze])
+      end
+    end
+  end
 end
