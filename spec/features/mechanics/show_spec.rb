@@ -37,10 +37,18 @@ RSpec.describe 'the mechanic show page' do
     end
   end
   it 'has a form element to add rides' do
-    visit "/mechanics/#{@cr.id}"
+    visit "/mechanics/#{@ab.id}"
 
     within('.addform') do
       expect(page).to have_content('Add Ride to Service List')
+      fill_in 'ride_id', with: @fall.id
+      click_button 'Add Ride'
+    end
+    expect(current_path).to eq("/mechanics/#{@ab.id}")
+    within('.rides') do
+      expect(page).to have_content(@fall.name)
+      expect(page).to have_content(@hool.name)
+      expect(@fall.name).to appear_before(@hool.name)
     end
   end
 end
