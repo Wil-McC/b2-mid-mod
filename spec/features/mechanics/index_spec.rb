@@ -10,5 +10,17 @@ RSpec.describe 'the mechanic index page' do
     visit '/mechanics'
 
     expect(page).to have_content('All Mechanics')
+
+    within("#mechanic-#{@ab.id}") do
+      expect(page).to have_content(@ab.name)
+      expect(page).to have_content(@ab.years_experience)
+    end
+  end
+  it 'displays average years experience' do
+    visit '/mechanics'
+
+    within'.dashboard' do
+      expect(page).to have_content('169.67')
+    end
   end
 end
