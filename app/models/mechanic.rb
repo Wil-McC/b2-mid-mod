@@ -11,4 +11,8 @@ class Mechanic < ApplicationRecord
       mech.years_experience
     end.to_f
   end
+
+  def rides_sorted
+    rides.order('thrill_rating DESC')
+  end
 end

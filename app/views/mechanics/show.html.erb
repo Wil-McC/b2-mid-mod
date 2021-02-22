@@ -6,7 +6,7 @@
 </ul>
 <section class="rides">
   <h2>Rides Serviced</h2>
-  <% @mechanic.rides.each do |ride| %>
+  <% @mechanic.rides_sorted.each do |ride| %>
     <ul>
       <% if ride.open %>
           <li><%= ride.name %></li>
