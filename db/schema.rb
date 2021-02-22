@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_22_162219) do
+ActiveRecord::Schema.define(version: 2021_02_22_163414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,13 @@ ActiveRecord::Schema.define(version: 2021_02_22_162219) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "professors", force: :cascade do |t|
-    t.string "name"
-    t.integer "age"
-    t.string "specialty"
+  create_table "ride_mechanics", force: :cascade do |t|
+    t.bigint "mechanic_id"
+    t.bigint "ride_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["mechanic_id"], name: "index_ride_mechanics_on_mechanic_id"
+    t.index ["ride_id"], name: "index_ride_mechanics_on_ride_id"
   end
 
   create_table "rides", force: :cascade do |t|
@@ -38,20 +39,6 @@ ActiveRecord::Schema.define(version: 2021_02_22_162219) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "student_professors", force: :cascade do |t|
-    t.bigint "professor_id"
-    t.bigint "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["professor_id"], name: "index_student_professors_on_professor_id"
-    t.index ["student_id"], name: "index_student_professors_on_student_id"
-  end
-
-  create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.integer "age"
-  end
-
-  add_foreign_key "student_professors", "professors"
-  add_foreign_key "student_professors", "students"
+  add_foreign_key "ride_mechanics", "mechanics"
+  add_foreign_key "ride_mechanics", "rides"
 end
